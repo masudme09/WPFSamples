@@ -1,0 +1,360 @@
+﻿<Window x:Class="PDFSecureWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PDFSecureWPF"
+        mc:Ignorable="d"
+        Title="SecureMyPDF By Solidaddons.com" Height="730" Width="920"
+        WindowStyle="None" ResizeMode="CanResize" x:Name="MainWindowPDFSecure"
+        BorderThickness="0" MaxWidth="920" MaxHeight="750" MinWidth="750" 
+        MinHeight="680"
+        >
+    <Window.Resources>
+        <!--Style for Large Display-->
+        <Style TargetType="Label" x:Key="defaultLblStyle">
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="txtBlockStyle">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="btnStyle">
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="txtBxStyle">
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <Style TargetType="RadioButton" x:Key="RadioButtonStyle">
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <Style TargetType="CheckBox" x:Key="chkBxStyle">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="titleLblStyle">
+            <Setter Property="FontSize" Value="30"/>
+        </Style>
+
+        <!--//Style for small screen-->
+        <Style TargetType="Label" x:Key="defaultLblSmallStyle">
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="txtBlockSmallStyle">
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="btnSmallStyle">
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="txtBxSmallStyle">
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <Style TargetType="RadioButton" x:Key="RadioButtonSmallStyle">
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <Style TargetType="CheckBox" x:Key="chkBxSmallStyle">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="titleSmallLblStyle">
+            <Setter Property="FontSize" Value="30"/>
+        </Style>
+    </Window.Resources>
+    
+    <!--//For Screensize larger than 14inch or 720 x 1280//-->
+    <StackPanel x:Name="stackLargeScreen" Visibility="Visible">
+        <Grid Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".8*"/>
+                <ColumnDefinition Width=".2*"/>
+            </Grid.ColumnDefinitions>
+            <Label Height="25" Background="#FFF4505B" Grid.Column="0" 
+                   Grid.ColumnSpan="2"
+                   VerticalAlignment="Top"
+                   MouseDown="Label_MouseDown"/>
+            <Button Grid.Column="1" Content="  X   " HorizontalAlignment="Right" Height="23"
+                   Foreground="White"
+                   VerticalContentAlignment="Top"
+                   VerticalAlignment="Top"
+                   FontSize="18"
+                   Padding="0" Background="#FFF4505B"
+                   FontWeight="Light"
+                   BorderThickness="0"
+                   Click="Button_Click"
+                   ToolTip="Close the application"
+                    />
+        </Grid>
+        
+        <!--//Ttitle//-->
+        <TextBlock x:Name="lblTitle" Height="50" Text="SecureMyPDF"
+               FontSize="30" VerticalAlignment="Center" 
+               FontWeight="Light" Padding="20 0 0 0" />
+        
+        <!--//For Menu Item//-->
+        <Grid Height="50" Margin="20 10 0 0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Content="PDF Secure" FontWeight="DemiBold"
+                       Style="{StaticResource defaultLblStyle}"
+                       x:Name="lblPdfSecure" MouseDown="lblPdfSecure_MouseDown"/>
+                <Label Content="Bulk Securing" FontWeight="DemiBold" 
+                       Style="{StaticResource defaultLblStyle}"
+                       x:Name="lblBulkSecure" MouseDown="lblBulkSecure_MouseDown"/>
+                <Label Content="Help" FontWeight="DemiBold"
+                       Style="{StaticResource defaultLblStyle}"
+                       x:Name="lblHelp" MouseDown="lblHelp_MouseDown"/>
+                <Label Content="About" FontWeight="DemiBold"
+                       Style="{StaticResource defaultLblStyle}"
+                       x:Name="lblAbout" MouseDown="lblAbout_MouseDown"/>
+            </StackPanel>            
+        </Grid>
+        <StackPanel Orientation="Horizontal" Margin="26 0 0 0" Background="LightGray"
+                    Height="4" VerticalAlignment="Top">
+            <Label Height="5" 
+                       Content="                  " Background="Red"
+                   x:Name="lblSelectionPDFSecure"
+                   Style="{StaticResource defaultLblStyle}"/>
+            <Label Height="5" 
+                       Content="                       " Background="LightGray"
+                   x:Name="lblSelectionBulkSecure"
+                   Style="{StaticResource defaultLblStyle}"/>
+            <Label Height="5" 
+                       Content="      " Background="LightGray"
+                   x:Name="lblSelectionHelp"
+                   Style="{StaticResource defaultLblStyle}"/>
+            <Label Height="5" 
+                       Content="              " Background="LightGray"
+                   x:Name="lblSelectionAbout"
+                   Style="{StaticResource defaultLblStyle}"/>
+        </StackPanel>
+
+        <!--//Parent Grid that will contain menu grid//-->
+        <Grid x:Name="GridParent" Margin="20 10 20 0">
+            
+            <!--//Grid for PDFSecure//-->
+            <Grid x:Name="GridPdfSecure" Visibility="Hidden">
+            <StackPanel>
+                    
+                    <!--//Help Text for PDF Secure//-->
+                    <TextBlock Style="{StaticResource txtBlockStyle}"                             
+                        Text="After Securing the PDF (including annotations) your PDF will not be selectable."/>
+                    <TextBlock Style="{StaticResource txtBlockStyle}"
+                        Text="For more security, you can set also a password, the software will create a password protected ZIP."/>
+
+                    <!--//For PDF Browse//-->
+                    <Grid Margin="0 50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".3*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" 
+                                Content="Select PDF"
+                                Style="{StaticResource btnStyle}" Height="24" 
+                                VerticalAlignment="Top"
+                                x:Name="btnSelectPDF"
+                                Click="btnSelectPDF_Click"/>
+                        <TextBox Grid.Column="1" Margin="20 0 10 0"
+                                 Style="{StaticResource txtBxStyle}"
+                                 x:Name="txtBxFilePath"/>
+                    </Grid>
+                    
+                    <!--//for password protected zip// -->
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0">
+                            <CheckBox VerticalAlignment="Center" x:Name="chkBxPdfSecureZipPass" 
+                                      Checked="chkBxPdfSecureZipPass_Checked"
+                                      Unchecked="chkBxPdfSecureZipPass_Unchecked"/>
+                            <TextBlock Text="Make a password protected zip with the PDF"
+                                   Padding="15 0 0 0" VerticalAlignment="Center"
+                                       FontWeight="SemiBold" FontSize="18"
+                                       Style="{StaticResource txtBlockStyle}"/>
+                        </StackPanel>
+                        <TextBox Text="{Binding Password}" Foreground="Gray" Width="300" 
+                                 Margin="30 5"
+                                 HorizontalAlignment="Left"
+                                 FontSize="20" IsEnabled="False" 
+                                 x:Name="txtBoxPdfSecureZipPass" 
+                                 Style="{StaticResource txtBxStyle}"
+                                 Visibility="Collapsed"/>
+                        
+                        <PasswordBox Foreground="Gray" Width="300" 
+                                 Margin="30 5"
+                                 HorizontalAlignment="Left"
+                                 FontSize="20" IsEnabled="False"                                 
+                                 x:Name="Password" 
+                                 PasswordChanged="Password_PasswordChanged"
+                                 />
+                    </StackPanel>
+                    
+                    <!--//For Quality of Output selection//-->
+                    <StackPanel Margin="0 60">
+                        <TextBlock Text="Quality of output PDF" 
+                                   FontWeight="SemiBold" FontSize="18"
+                                   Style="{StaticResource txtBlockStyle}"/>
+                        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                            <RadioButton Content="96" 
+                                         VerticalContentAlignment="Center"
+                                         Style="{StaticResource RadioButtonStyle}"
+                                         x:Name="radioButton96"
+                                         Checked="radioButton96_Checked"/>
+                            <RadioButton Content="240" Margin="15 0 0 0"
+                                         VerticalContentAlignment="Center"
+                                         Style="{StaticResource RadioButtonStyle}"
+                                         Checked="radioButton96_Checked"/>
+                            <RadioButton Content="300" Margin="15 0 0 0"
+                                         VerticalContentAlignment="Center"
+                                         Style="{StaticResource RadioButtonStyle}"
+                                         Checked="radioButton96_Checked"/>
+                            <RadioButton Content="600" Margin="15 0 0 0"
+                                         VerticalContentAlignment="Center"
+                                         Style="{StaticResource RadioButtonStyle}"
+                                         Checked="radioButton96_Checked"/>
+                            <RadioButton Content="1200" Margin="15 0 0 0"
+                                         VerticalContentAlignment="Center"
+                                         Style="{StaticResource RadioButtonStyle}"
+                                         Checked="radioButton96_Checked"/>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    <!--For Main Secure Button and Progress Bar-->
+                    <Grid Margin="0 15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Content="Make the PDF Secure" Grid.Column="0"
+                                Style="{StaticResource  btnStyle}" 
+                                x:Name="btnMakeSecurePDF"
+                                Click="btnMakeSecurePDF_Click"/>
+                        <ProgressBar Grid.Column="1" Width="auto" Margin="20 0 10 0"
+                                      x:Name="makeSecureProgressBar"    
+                                     />
+                    </Grid>
+                </StackPanel>
+            </Grid>
+            
+            <!--//Grid for BulkSecure//-->
+            <Grid x:Name="GridBulkSecure" Visibility="Hidden">
+                <StackPanel>
+                    <!--//Help Text for PDF Secure//-->
+                    <TextBlock Style="{StaticResource txtBlockStyle}"
+                        Text="Batch Secure will secure all the selected pdf files. Combine them to single pdf is also possible"/>
+                    <TextBlock Style="{StaticResource txtBlockStyle}"
+                        Text="For more security, you can set also a password, the software will create a password protected ZIP."/>
+                    
+                    <!--//Precheck Conditions//-->
+                    <StackPanel Margin="0 30 0 10">
+                        <CheckBox Content="Convert to single file" VerticalContentAlignment="Center" 
+                                  Padding="10 0 0 0"
+                                  Style="{StaticResource chkBxStyle}" x:Name="chkBxConvertToSingle"/>
+                        
+                        <CheckBox Content="Make a Password Protected ZIP with the PDF"
+                                   Padding="10 0 0 0" VerticalContentAlignment="Center"
+                                   FontWeight="DemiBold" Margin="0 10 0 0"
+                                  x:Name="chkBulkSecureZipPass" Checked="chkBulkSecureZipPass_Checked" 
+                                  Unchecked="chkBulkSecureZipPass_Unchecked"
+                                  Style="{StaticResource chkBxStyle}"/>
+                        <TextBox Text="Password for ZIP" Foreground="Gray" Width="260" 
+                                 Margin="25 8"
+                                 HorizontalAlignment="Left"
+                                 IsEnabled="False" 
+                                 x:Name="txtBxBulkSecureZipPass"
+                                 MouseEnter="txtBxBulkSecureZipPass_MouseEnter"
+                                 Style="{StaticResource txtBxStyle}"/>
+                    </StackPanel>
+                    
+                    <!--Select PDF files-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".4*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Content="Select PDF Files" Grid.Column="0" 
+                                Height="30"
+                                Style="{StaticResource btnStyle}"
+                                x:Name="btnSelectPdfFiles" Click="btnSelectPdfFiles_Click"/>
+                        <ListBox x:Name="listBoxFiles" Grid.Column="1" Height="210"
+                                 Margin="15 0 0 0"/>
+                    </Grid>
+                    
+                    <!--Start Securing-->
+                    <Grid Margin="0 20 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".4*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width=".1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Content="Start Securing" Grid.Column="0" Height="30"
+                                VerticalAlignment="Top"
+                                Style="{StaticResource btnStyle}"
+                                x:Name="pdfBatchSecuring" Click="pdfBatchSecuring_Click"/>
+                        
+                        <!--//For progress bar and current file processing name label-->
+                        <StackPanel Grid.Column="1" Margin="15 0 0 0">
+                            <ProgressBar Height="30" Margin="0 0 0 0" 
+                                         Background="LightGray" x:Name="batchSecureProgressBar"/>
+                            <Label x:Name="lblFileProcessing" 
+                                   Content="Processing: dummyFile.pdf" 
+                                   FontSize="15" 
+                                   Style="{StaticResource defaultLblStyle}"/>
+                        </StackPanel>
+                    </Grid>
+                    
+                </StackPanel>
+            </Grid> 
+            
+            <!--//Grid For Help//-->
+            <Grid Margin="150" x:Name="gridHelp" Visibility="Visible">
+                <Label Content="www.solidaddons.com" Style="{StaticResource titleLblStyle}"/>
+                <Button x:Name="testButton" Content="Test" Click="testButton_Click"/>
+            </Grid>
+            
+            <!--//Grid for about//-->
+            <Grid x:Name="gridAbout" Visibility="Hidden">
+                <StackPanel Margin="0 20">
+                    <TextBlock Text="Version 1.0"
+                               Style="{StaticResource  txtBlockStyle}"/>
+                    <TextBlock Text="Copyright 2020 - Solidaddons.com"
+                               Style="{StaticResource  txtBlockStyle}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width=".2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="Images/solidaddonslogo.png" Grid.Column="1" 
+                               HorizontalAlignment="Right" 
+                               Height="100"
+                               Margin="5 10"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        
+    <!--//Bottom Design for SoldAddons-->
+        <Canvas Height="25">
+            
+        </Canvas>
+        <Line Height="8" Stroke="#FFD7484F"  StrokeThickness="20"
+              X1="0" X2="500" Opacity="0.95"/>
+        <Line Height="8" Stroke="#FFD7272F"  StrokeThickness="4"
+              X1="0" X2="490" Margin="0 12 0 0" Opacity="0.95"/>
+        <Line Height="8" Stroke="#FFD7484F" StrokeThickness="3"
+              X1="0" X2="480" Margin="0 8 0 0" Opacity="0.95"/>
+        
+    </StackPanel>
+    
+</Window>
